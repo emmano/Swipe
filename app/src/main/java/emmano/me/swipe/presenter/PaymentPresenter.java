@@ -1,6 +1,6 @@
 package emmano.me.swipe.presenter;
 
-import emmano.me.swipe.model.Payment;
+import emmano.me.swipe.model.Repo;
 import emmano.me.swipe.view.RowItemView;
 
 /**
@@ -8,9 +8,10 @@ import emmano.me.swipe.view.RowItemView;
  */
 public class PaymentPresenter {
     
-    public void bindData(Payment model, RowItemView view){
+    public void bindData(Repo model, RowItemView view){
         
-        view.setPaymentDescription(model.getDescription());
+        view.setPaymentDescription(model.getLogin());
+        view.setAvatar(model.getAvatarUrl());
         
     }
 

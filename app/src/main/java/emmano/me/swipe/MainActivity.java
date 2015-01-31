@@ -6,13 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import java.util.Arrays;
-import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import emmano.me.swipe.model.Payment;
+import emmano.me.swipe.service.GithubService;
 import emmano.me.swipe.widget.StrikeThroughAdapter;
+import retrofit.RestAdapter;
+import rx.android.schedulers.AndroidSchedulers;
 
 
 public class MainActivity extends Activity {
@@ -25,15 +24,16 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        
-        final Payment payment = new Payment();
-        final Payment payment1 = new Payment();
-        
-        payment.setDescription("Some payment description");
-        payment1.setDescription("Another payment description");
-        
-        List<Payment> list = Arrays.asList(payment, payment1);
-        listView.setAdapter(new StrikeThroughAdapter(list));
+
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("https://api.github.com")
+                .build();
+
+        final GithubService githubService = adapter.create(GithubService.class);
+
+        githubService.getStargazers()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(repoList -> listView.setAdapter(new StrikeThroughAdapter(repoList)));
 
     }
 

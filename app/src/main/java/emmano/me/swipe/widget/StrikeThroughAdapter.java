@@ -6,7 +6,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import emmano.me.swipe.model.Payment;
+import emmano.me.swipe.model.Repo;
 import emmano.me.swipe.presenter.PaymentPresenter;
 import emmano.me.swipe.view.RowItemView;
 
@@ -15,11 +15,11 @@ import emmano.me.swipe.view.RowItemView;
  */
 public class StrikeThroughAdapter extends BaseAdapter {
 
-    private List<Payment> list;
+    private List<Repo> list;
     
     private PaymentPresenter presenter;
 
-    public StrikeThroughAdapter(List<Payment> list){
+    public StrikeThroughAdapter(List<Repo> list){
 
         this.list = list;
         presenter = new PaymentPresenter();
@@ -32,7 +32,7 @@ public class StrikeThroughAdapter extends BaseAdapter {
     }
 
     @Override
-    public Payment getItem(int position) {
+    public Repo getItem(int position) {
         return list.get(position);
     }
 

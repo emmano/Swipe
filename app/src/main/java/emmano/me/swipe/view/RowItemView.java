@@ -1,11 +1,14 @@
 package emmano.me.swipe.view;
 
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +23,9 @@ public class RowItemView extends RelativeLayout implements View.OnTouchListener 
 
     @InjectView(R.id.strikeTextView)
     protected TextView strikeTextView;
+    
+    @InjectView(R.id.avatar)
+    protected ImageView avatar;
 
     private GestureDetectorCompat gestureDetector;
 
@@ -31,6 +37,10 @@ public class RowItemView extends RelativeLayout implements View.OnTouchListener 
     public void setPaymentDescription(String description){
         strikeTextView.setText(description);
         
+    }
+    
+    public void setAvatar(String url){
+        Picasso.with(getContext()).load(url).into(avatar);
     }
 
     private void init() {
